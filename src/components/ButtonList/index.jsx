@@ -1,12 +1,11 @@
 // styled components
-import FlexContainer from '../../styled/FlexContainer';
-import Button from '../../styled/Button';
+import { Button, Container } from './styles';
 
 const ButtonList = ({ handleClick, formType }) => {
     const currentHighlightedButton = formType === 'Register';
 
     return (
-        <FlexContainer gap={10} marginBottom={20}>
+        <Container>
             <Button
                 onClick={handleClick}
                 type="button"
@@ -23,7 +22,7 @@ const ButtonList = ({ handleClick, formType }) => {
             >
                 Log In
             </Button>
-        </FlexContainer>
+        </Container>
     );
 };
 

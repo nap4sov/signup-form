@@ -1,14 +1,11 @@
 // hooks
 import { useState } from 'react';
-
 // complex components
 import ButtonList from '../../components/ButtonList';
-import RegistrationForm from '../../components/RegistrationForm';
-import LoginForm from '../../components/LoginForm';
-
+import RegistrationForm from '../../components/Forms/RegistrationForm';
+import LoginForm from '../../components/Forms/LoginForm';
 // styled components
-import MainHeading from '../../styled/MainHeading';
-import FormContainer from '../../styled/FormContainer';
+import { FormHeading, FormContainer } from './styles';
 
 const MainForm = () => {
     const [formType, setFormType] = useState('Register');
@@ -19,7 +16,7 @@ const MainForm = () => {
 
     return (
         <FormContainer>
-            <MainHeading>{formType} Form</MainHeading>
+            <FormHeading>{formType} Form</FormHeading>
             <ButtonList handleClick={handleButtonClick} formType={formType} />
             {formType === 'Register' ? <RegistrationForm /> : <LoginForm />}
         </FormContainer>
