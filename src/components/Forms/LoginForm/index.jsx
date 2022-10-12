@@ -1,5 +1,10 @@
 // hooks
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// operations
+import { loginUser } from '../../../redux/users/operations';
+// selectors
+import { userToken } from '../../../redux/selectors';
 // styled components
 import { Form, Input, Label, Button, FormField } from '../styles.js';
 // complex components
@@ -14,12 +19,13 @@ const LoginForm = () => {
     const [formData, setFormData] = useState(LOGIN_INIT_STATE);
     // form state
     const [errors, setErrors] = useState({});
-    const [success, setSuccess] = useState(false);
+    // dispatch instance
+    const dispatch = useDispatch();
 
     const handleInputChange = ({ target }) =>
         setFormData({ ...formData, [target.name]: target.value });
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         const { errorData, hasError } = validateLogin(formData);
@@ -27,10 +33,10 @@ const LoginForm = () => {
 
         if (hasError) return;
 
-        setSuccess(true);
+        dispatch(loginUser(formData));
     };
 
-    if (success) return <SuccessNotifier />;
+    if (useSelector(userToken)) return <SuccessNotifier />;
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -51,7 +57,7 @@ const LoginForm = () => {
                 </FormField>
             ))}
 
-            <Button type="submit" primary bottomed>
+            <Button type="submit" primary>
                 Log In
             </Button>
         </Form>

@@ -1,6 +1,10 @@
 // hooks
 import { useState } from 'react';
-import { useLocalStorage } from '../../../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+// operations
+import { registerUser } from '../../../redux/users/operations';
+// selectors
+import { userEmail } from '../../../redux/selectors';
 // styled components
 import { Form, Input, Label, Button, FormField } from '../styles.js';
 // complex components
@@ -10,7 +14,6 @@ import {
     REGISTRATION_FIELDS,
     REGISTRATION_INIT_STATE,
 } from '../../../constants/formInfo';
-import { errorMessages } from '../../../constants/statusMessages';
 // validation
 import { validateRegistration } from '../../../helpers/formValidation';
 
@@ -19,14 +22,13 @@ const RegistrationForm = () => {
     const [formData, setFormData] = useState(REGISTRATION_INIT_STATE);
     // form state
     const [errors, setErrors] = useState({});
-    const [success, setSuccess] = useState(false);
-    // localstorage interaction
-    const [user, setUser] = useLocalStorage('USER');
+    // dispatch instance
+    const dispatch = useDispatch();
 
     const handleInputChange = ({ target }) =>
         setFormData({ ...formData, [target.name]: target.value });
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         const { errorData, hasError } = validateRegistration(formData);
@@ -34,17 +36,10 @@ const RegistrationForm = () => {
 
         if (hasError) return;
 
-        if (formData.email === user.email) {
-            errorData.email = errorMessages.userExists;
-            setErrors(errorData);
-            return;
-        }
-
-        setUser(formData);
-        setSuccess(true);
+        dispatch(registerUser(formData));
     };
 
-    if (success) return <SuccessNotifier />;
+    if (useSelector(userEmail)) return <SuccessNotifier />;
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -67,9 +62,7 @@ const RegistrationForm = () => {
                 </FormField>
             ))}
 
-            <Button type="submit" bottomed>
-                Register
-            </Button>
+            <Button type="submit">Register</Button>
         </Form>
     );
 };
