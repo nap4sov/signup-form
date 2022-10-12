@@ -17,11 +17,12 @@ export const validateLogin = ({ email, password }) => {
     };
 };
 
-export const validateRegistration = ({ username, email, password }) => {
+export const validateRegistration = ({ name, email, password }) => {
     const errorData = {
-        username: usernameRegex.test(username)
-            ? null
-            : errorMessages.invalidUsername,
+        name:
+            name?.length > 1 && usernameRegex.test(name)
+                ? null
+                : errorMessages.invalidUsername,
         email: emailRegex.test(email) ? null : errorMessages.invalidEmail,
         password: password?.length >= 6 ? null : errorMessages.invalidPassword,
     };
