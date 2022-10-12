@@ -1,5 +1,5 @@
 export const REGISTRATION_FIELDS = {
-    username: {
+    name: {
         type: 'text',
         label: 'Username',
     },
@@ -14,7 +14,7 @@ export const REGISTRATION_FIELDS = {
 };
 
 export const REGISTRATION_INIT_STATE = {
-    username: '',
+    name: '',
     email: '',
     password: '',
 };
