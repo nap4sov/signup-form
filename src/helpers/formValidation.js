@@ -6,24 +6,28 @@ import { errorMessages } from '../constants/statusMessages';
 // password must be 6 symbols or more
 
 export const validateLogin = ({ email, password }) => {
-    console.log(email, password);
-    return {
+    const errorData = {
         email: emailRegex.test(email) ? null : errorMessages.invalidEmail,
         password: password?.length >= 6 ? null : errorMessages.invalidPassword,
+    };
+
+    return {
+        errorData,
+        hasError: errorData?.email || errorData?.password,
     };
 };
 
 export const validateRegistration = ({ username, email, password }) => {
-    return {
+    const errorData = {
         username: usernameRegex.test(username)
             ? null
             : errorMessages.invalidUsername,
         email: emailRegex.test(email) ? null : errorMessages.invalidEmail,
         password: password?.length >= 6 ? null : errorMessages.invalidPassword,
     };
+    return {
+        errorData,
+        hasError:
+            errorData?.username || errorData?.email || errorData?.password,
+    };
 };
-
-export const loginFailed = errors => errors?.email || errors?.password;
-
-export const registrationFailed = errors =>
-    errors?.username || errors?.email || errors?.password;

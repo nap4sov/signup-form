@@ -12,10 +12,7 @@ import {
 } from '../../../constants/formInfo';
 import { errorMessages } from '../../../constants/statusMessages';
 // validation
-import {
-    validateRegistration,
-    registrationFailed,
-} from '../../../helpers/formValidation';
+import { validateRegistration } from '../../../helpers/formValidation';
 
 const RegistrationForm = () => {
     // field state
@@ -32,14 +29,14 @@ const RegistrationForm = () => {
     const handleSubmit = event => {
         event.preventDefault();
 
-        const validationErrors = validateRegistration(formData);
-        setErrors(validationErrors);
+        const { errorData, hasError } = validateRegistration(formData);
+        setErrors(errorData);
 
-        if (registrationFailed(validationErrors)) return;
+        if (hasError) return;
 
         if (formData.email === user.email) {
-            validationErrors.email = errorMessages.userExists;
-            setErrors(validationErrors);
+            errorData.email = errorMessages.userExists;
+            setErrors(errorData);
             return;
         }
 

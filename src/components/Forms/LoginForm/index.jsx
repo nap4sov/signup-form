@@ -7,7 +7,7 @@ import SuccessNotifier from '../../SuccessNotifier';
 // constants
 import { LOGIN_FIELDS, LOGIN_INIT_STATE } from '../../../constants/formInfo';
 // validation
-import { validateLogin, loginFailed } from '../../../helpers/formValidation';
+import { validateLogin } from '../../../helpers/formValidation';
 
 const LoginForm = () => {
     // field state
@@ -22,10 +22,10 @@ const LoginForm = () => {
     const handleSubmit = event => {
         event.preventDefault();
 
-        const validationErrors = validateLogin(formData);
-        setErrors(validationErrors);
+        const { errorData, hasError } = validateLogin(formData);
+        setErrors(errorData);
 
-        if (loginFailed(validationErrors)) return;
+        if (hasError) return;
 
         setSuccess(true);
     };
