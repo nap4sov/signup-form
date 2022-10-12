@@ -6,8 +6,8 @@ export const login = async userData => {
 
         authToken.set(data.token);
         return data.token;
-    } catch (error) {
-        return error;
+    } catch ({ response }) {
+        return response.data;
     }
 };
 
@@ -15,7 +15,7 @@ export const getCurrent = async () => {
     try {
         const { data } = await axios.get('/auth/user');
         return data;
-    } catch (error) {
-        return error;
+    } catch ({ response }) {
+        return response.data;
     }
 };
