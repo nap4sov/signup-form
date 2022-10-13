@@ -28,7 +28,6 @@ export const validateRegistration = ({ name, email, password }) => {
     };
     return {
         errorData,
-        hasError:
-            errorData?.username || errorData?.email || errorData?.password,
+        hasError: errorData?.name || errorData?.email || errorData?.password,
     };
 };
