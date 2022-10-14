@@ -13,6 +13,7 @@ export const BasicButton = styled.button`
     border: 1px solid #097957;
     outline: none;
     font-size: 16px;
+    cursor: pointer;
 
     transition: box-shadow 300ms ease, border 300ms ease;
 
@@ -36,4 +37,14 @@ export const BasicButton = styled.button`
             color: white;
             border-color: transparent;
         `};
+`;
+
+export const Section = styled.section`
+    padding: 40px 0;
+`;
+
+export const CenteredContainer = styled.div`
+    width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
 `;
