@@ -1,6 +1,7 @@
 // hooks
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useGetSearchParams } from '../../../hooks/pagination';
 import { useNavigateHome } from '../../../hooks/navigation';
 import { useGetDetailsById } from '../../../hooks/posts';
 // styled components
@@ -12,12 +13,14 @@ import { showError } from '../../../helpers/notifier';
 
 const PostDetails = ({ id }) => {
     const { id: urlId } = useParams();
+    const params = useGetSearchParams();
+
     const { data, error } = useGetDetailsById(id || urlId);
     const { fullText, title, postedBy, dateCreated, likes } = useMemo(
         () => (data ? data : {}),
         [data],
     );
-    const navigateHome = useNavigateHome();
+    const navigateHome = useNavigateHome(params);
 
     if (error) showError(error.message);
     if (id) return <Description>{fullText}</Description>;

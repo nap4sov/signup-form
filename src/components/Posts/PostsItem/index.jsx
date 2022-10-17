@@ -6,12 +6,23 @@ import { Wrapper, Title, Description, InfoBar } from '../styles';
 import { BasicButton } from '../../../styles';
 // components
 import PostDetails from '../PostDetails';
+import { PostSkeleton } from '../PostSkeleton';
 // helpers
 import { formatDate } from '../../../helpers/dateFormatter';
 
-const PostsItem = ({ id, title, date, description, likes }) => {
+const PostsItem = ({
+    id,
+    title,
+    date,
+    description,
+    likes,
+    isFetching,
+    params,
+}) => {
     const [expanded, setExpanded] = useState(false);
-    const navigateToPost = useNavigateToPost(id);
+    const navigateToPost = useNavigateToPost(id, params);
+
+    if (isFetching) return <PostSkeleton />;
 
     return (
         <Wrapper>

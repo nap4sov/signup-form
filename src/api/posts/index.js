@@ -1,7 +1,7 @@
 import { axios } from '../config';
 
-export const getAll = async () => {
-    const { data } = await axios.get('/posts');
+export const getAll = async skip => {
+    const { data } = await axios.get(`/posts?skip=${skip}`);
     return data;
 };
 

@@ -1,12 +1,20 @@
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../constants/routes';
 
-export const useNavigateHome = () => {
+export const useNavigateHome = params => {
     const navigate = useNavigate();
-    return () => navigate(ROUTES.posts);
+    return () =>
+        navigate({
+            pathname: ROUTES.posts,
+            search: '?' + createSearchParams(params),
+        });
 };
 
-export const useNavigateToPost = id => {
+export const useNavigateToPost = (id, params) => {
     const navigate = useNavigate();
-    return () => navigate(`${ROUTES.posts}/${id}`);
+    return () =>
+        navigate({
+            pathname: `${ROUTES.posts}/${id}`,
+            search: '?' + createSearchParams(params),
+        });
 };
