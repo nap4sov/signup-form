@@ -13,12 +13,6 @@ const FormWrapper = styled.div`
     margin: 0 auto;
 `;
 
-export const FormHeading = styled.h1`
-    margin-top: 0;
-    margin-bottom: 30px;
-    text-align: center;
-`;
-
 export const FormContainer = ({ children }) => {
     return (
         <Section>

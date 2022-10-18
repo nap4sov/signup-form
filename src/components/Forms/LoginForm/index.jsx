@@ -1,6 +1,7 @@
 // hooks
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigateHome } from '../../../hooks/navigation';
 // operations
 import { loginUser } from '../../../redux/users/operations';
 // selectors
@@ -21,6 +22,7 @@ const LoginForm = () => {
     const [errors, setErrors] = useState({});
     // dispatch instance
     const dispatch = useDispatch();
+    const navigateHome = useNavigateHome();
 
     const handleInputChange = ({ target }) =>
         setFormData({ ...formData, [target.name]: target.value });
@@ -34,6 +36,7 @@ const LoginForm = () => {
         if (hasError) return;
 
         dispatch(loginUser(formData));
+        navigateHome();
     };
 
     if (useSelector(userToken)) return <SuccessNotifier />;

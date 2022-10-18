@@ -7,6 +7,8 @@ import { useGetDetailsById } from '../../../hooks/posts';
 // styled components
 import { Description, Title, Wrapper } from '../styles';
 import { BasicButton } from '../../../styles';
+// components
+import { CommentsList } from '../../Comments/CommentsList';
 // helpers
 import { formatDate } from '../../../helpers/dateFormatter';
 import { showError } from '../../../helpers/notifier';
@@ -35,6 +37,7 @@ const PostDetails = ({ id }) => {
             </Description>
             <Description primary>Total likes: {likes?.length}</Description>
             <BasicButton onClick={() => navigateHome()}>Back</BasicButton>
+            <CommentsList postId={urlId} />
         </Wrapper>
     );
 };

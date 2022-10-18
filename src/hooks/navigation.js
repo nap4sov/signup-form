@@ -18,3 +18,8 @@ export const useNavigateToPost = (id, params) => {
             search: '?' + createSearchParams(params),
         });
 };
+
+export const useNavigateToSignup = () => {
+    const navigate = useNavigate();
+    return () => navigate(ROUTES.signup);
+};
