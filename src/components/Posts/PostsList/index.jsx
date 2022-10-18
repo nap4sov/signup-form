@@ -1,5 +1,6 @@
 // hooks
 import { useMemo } from 'react';
+import { useGetSearchParams } from '../../../hooks/pagination';
 import { useGetAllPosts } from '../../../hooks/posts';
 // complex components
 import PostsItem from '../PostsItem';
@@ -7,11 +8,11 @@ import PostsItem from '../PostsItem';
 import { showError } from '../../../helpers/notifier';
 
 const PostsList = () => {
-    const { data, error, isLoading } = useGetAllPosts();
+    const params = useGetSearchParams();
+    const { data, error, isFetching } = useGetAllPosts(params.skip);
     const posts = useMemo(() => (data ? data.data : []), [data]);
 
     if (error) showError(error.message);
-    if (isLoading) return <h1>Loading...</h1>;
 
     return (
         <>
@@ -23,6 +24,8 @@ const PostsList = () => {
                     date={dateCreated}
                     description={description}
                     likes={likes.length}
+                    isFetching={isFetching}
+                    params={params}
                 />
             ))}
         </>
