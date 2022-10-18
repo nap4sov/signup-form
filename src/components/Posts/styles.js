@@ -35,10 +35,17 @@ export const Description = styled.p`
     margin-top: 0;
     margin-bottom: 20px;
     color: #838383;
+    pointer-events: none;
     ${props =>
         props.primary &&
         css`
             color: black;
+        `}
+    ${props =>
+        props.enabled &&
+        css`
+            cursor: pointer;
+            pointer-events: all;
         `}
 `;
 
