@@ -1,5 +1,5 @@
 // hooks
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useCreatePost } from '../../../hooks/posts';
 // styled components
 import { Wrapper } from '../styles';
@@ -8,9 +8,9 @@ import { SubmitButton, CloseButton } from './styles';
 // constants
 import { POST_FIELDS, POST_INIT_STATE } from '../../../constants/postInfo';
 
-export const NewPost = ({ setNewPostOpen }) => {
+export const NewPost = ({ setNewPostOpen, skip }) => {
     const [postData, setPostData] = useState(POST_INIT_STATE);
-    const { refetch } = useCreatePost(postData);
+    const { refetch } = useCreatePost({ postData, skip });
 
     const handleInputChange = ({ target }) => {
         setPostData({ ...postData, [target.name]: target.value });
@@ -22,6 +22,14 @@ export const NewPost = ({ setNewPostOpen }) => {
         setPostData(POST_INIT_STATE);
         setNewPostOpen(false);
     };
+
+    const postIsValid = useMemo(
+        () =>
+            postData.description !== '' &&
+            postData.fullText.length >= 20 &&
+            postData.title.length >= 5,
+        [postData],
+    );
 
     return (
         <Wrapper>
@@ -36,9 +44,7 @@ export const NewPost = ({ setNewPostOpen }) => {
                         value: postData[name],
                     }),
                 )}
-                {postData.fullText.length > 20 && (
-                    <SubmitButton>Create a post</SubmitButton>
-                )}
+                {postIsValid && <SubmitButton>Create a post</SubmitButton>}
             </Form>
         </Wrapper>
     );

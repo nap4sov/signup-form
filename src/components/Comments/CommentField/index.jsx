@@ -3,11 +3,13 @@ import { useMemo, useState } from 'react';
 import { useCreateNewComment } from '../../../hooks/comments';
 // styled components
 import { Form, TextArea, SubmitButton } from './styles';
+// helpers
+import { validateComment } from '../../../helpers/validation.js';
 
 export const CommentField = ({ postId }) => {
     const [comment, setComment] = useState('');
     const { refetch } = useCreateNewComment({ postId, comment });
-    const validComment = useMemo(() => comment.trim().length >= 3, [comment]);
+    const validComment = useMemo(() => validateComment(comment), [comment]);
 
     const handleInputChange = ({ target }) => {
         setComment(target.value);

@@ -4,6 +4,8 @@ export const LIKE_POST = 'likePost';
 
 export const NEW_POST = 'newPost';
 
+export const DELETE_POST = 'deletePost';
+
 export const COMMENTS = 'comments';
 
 export const COMMENT = 'comment';

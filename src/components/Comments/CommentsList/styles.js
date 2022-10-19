@@ -26,19 +26,21 @@ export const Text = styled.p`
 `;
 
 export const Likes = styled(Text)`
-    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 11px;
 `;
 
 export const DeleteContainer = styled.div`
     position: absolute;
-    right: 40px;
+    right: 50px;
     bottom: 10px;
     cursor: pointer;
 `;
 
-export const LikeContainer = styled.div`
-    position: absolute;
+export const LikeContainer = styled(DeleteContainer)`
     right: 10px;
-    bottom: 10px;
+`;
+export const SaveContainer = styled.div`
     cursor: pointer;
+    margin-top: 10px;
 `;

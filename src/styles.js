@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, createGlobalStyle } from 'styled-components';
 
 export const FlexContainer = styled.div`
     display: flex;
@@ -47,4 +47,10 @@ export const CenteredContainer = styled.div`
     width: 1200px;
     padding: 0 20px;
     margin: 0 auto;
+`;
+
+export const GlobalStyle = createGlobalStyle`
+p {
+    cursor: default;
+}
 `;

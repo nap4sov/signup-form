@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { SignupForm, Posts, Profile, Users } from '../layout';
+import { SignupForm, Posts, Profile } from '../layout';
 
 export const ROUTES = {
     posts: '/posts',
@@ -13,10 +13,6 @@ export const NAVIGATION_ROUTES = {
     home: {
         path: ROUTES.posts,
         label: 'Home',
-    },
-    users: {
-        path: ROUTES.users,
-        label: 'Users',
     },
     myProfile: {
         path: ROUTES.myProfile,
@@ -38,11 +34,6 @@ export const LAYOUT_ROUTES = {
     postDetails: {
         path: ROUTES.postDetails,
         element: () => <Posts />,
-        restricted: false,
-    },
-    users: {
-        path: ROUTES.users,
-        element: () => <Users />,
         restricted: false,
     },
     myProfile: {

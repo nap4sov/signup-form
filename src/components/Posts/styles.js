@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
+    position: relative;
     width: 600px;
     padding: 20px;
     margin: 0 auto 20px auto;
@@ -11,9 +12,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.h3`
+    display: inline-block;
     margin-top: 0;
     margin-bottom: 20px;
-    text-align: center;
     text-transform: uppercase;
 
     transition: color 300ms ease, transform 300ms ease;
@@ -21,7 +22,7 @@ export const Title = styled.h3`
     cursor: pointer;
     &:hover {
         color: #097957;
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 
     ${props =>
@@ -53,4 +54,18 @@ export const InfoBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+`;
+
+export const DeleteContainer = styled.div`
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+`;
+
+export const SaveContainer = styled(DeleteContainer)`
+    top: 60px;
 `;
