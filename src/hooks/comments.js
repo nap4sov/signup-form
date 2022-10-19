@@ -6,6 +6,7 @@ import {
     createNewComment,
     deleteComment,
     likeComment,
+    editComment,
 } from '../api/comments';
 
 export const useGetPostComments = postId => {
@@ -35,4 +36,15 @@ export const useLikeComment = ({ postId, commentId }) => {
         enabled: false,
         onSuccess: () => queryClient.invalidateQueries([COMMENTS, postId]),
     });
+};
+
+export const useEditComment = ({ postId, commentId, text }) => {
+    return useQuery(
+        [COMMENT, commentId],
+        () => editComment({ commentId, text }),
+        {
+            enabled: false,
+            onSuccess: () => queryClient.invalidateQueries([COMMENTS, postId]),
+        },
+    );
 };

@@ -1,4 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+    QueryCache,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // routing
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
@@ -7,15 +11,27 @@ import { PageHeader } from './layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 // selectors
-import { errorMessage, userToken } from './redux/selectors';
+import { userToken } from './redux/selectors';
 // operations
 import { getCurrentUser } from './redux/users/operations';
 // layouts
 import { LAYOUT_ROUTES } from './constants/routes';
+// global styles
+import { GlobalStyle } from './styles';
 // error display
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { showError } from './helpers/notifier';
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: false,
+        },
+    },
+    queryCache: new QueryCache({
+        onError: error => showError(error),
+    }),
+});
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -26,11 +42,9 @@ export const App = () => {
         dispatch(getCurrentUser());
     }, [dispatch, token]);
 
-    const error = useSelector(errorMessage);
-    if (error) toast.error(error);
-
     return (
         <QueryClientProvider client={queryClient}>
+            <GlobalStyle />
             <BrowserRouter>
                 <PageHeader />
                 <Routes>

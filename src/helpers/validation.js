@@ -1,10 +1,6 @@
 import { usernameRegex, emailRegex } from '../constants/regex';
 import { errorMessages } from '../constants/statusMessages';
 
-// username must consist of letters and spaces only
-// email must be a valid email
-// password must be 6 symbols or more
-
 export const validateLogin = ({ email, password }) => {
     const errorData = {
         email: emailRegex.test(email) ? null : errorMessages.invalidEmail,
@@ -31,3 +27,14 @@ export const validateRegistration = ({ name, email, password }) => {
         hasError: errorData?.name || errorData?.email || errorData?.password,
     };
 };
+
+export const validatePostEdit = update => {
+    if (Object.keys(update).length === 0) return false;
+    const validTitle =
+        typeof update.title === 'undefined' || update.title.length >= 5;
+    const validText =
+        typeof update.fullText === 'undefined' || update.fullText.length >= 20;
+    return validTitle && validText;
+};
+
+export const validateComment = comment => comment.trim().length >= 3;

@@ -77,5 +77,10 @@ export const usePagination = () => {
         ];
     }, [page, totalPages]);
 
-    return { renderParams, searchParams, setSearchParams, totalPages };
+    return {
+        renderParams,
+        skip: searchParams.get('skip'),
+        setSearchParams,
+        totalPages,
+    };
 };
