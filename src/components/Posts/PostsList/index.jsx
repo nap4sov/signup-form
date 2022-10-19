@@ -9,7 +9,7 @@ import { showError } from '../../../helpers/notifier';
 
 const PostsList = () => {
     const params = useGetSearchParams();
-    const { data, error, isFetching } = useGetAllPosts(params.skip);
+    const { data, error, isLoading } = useGetAllPosts(params.skip);
     const posts = useMemo(() => (data ? data.data : []), [data]);
 
     if (error) showError(error.message);
@@ -24,7 +24,7 @@ const PostsList = () => {
                     date={dateCreated}
                     description={description}
                     likes={likes.length}
-                    isFetching={isFetching}
+                    isFetching={isLoading}
                     params={params}
                 />
             ))}

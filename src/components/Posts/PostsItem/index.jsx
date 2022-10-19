@@ -1,11 +1,16 @@
 // hooks
 import { useState } from 'react';
 import { useNavigateToPost } from '../../../hooks/navigation';
+import { useLikePost } from '../../../hooks/posts';
+import { useSelector } from 'react-redux';
+// selectors
+import { userEmail } from '../../../redux/selectors';
 // styled components
 import { Wrapper, Title, Description, InfoBar } from '../styles';
 import { BasicButton } from '../../../styles';
 // components
 import PostDetails from '../PostDetails';
+import { CommentsList } from '../../Comments/CommentsList';
 import { PostSkeleton } from '../PostSkeleton';
 // helpers
 import { formatDate } from '../../../helpers/dateFormatter';
@@ -16,13 +21,16 @@ const PostsItem = ({
     date,
     description,
     likes,
-    isFetching,
+    isLoading,
     params,
 }) => {
-    const [expanded, setExpanded] = useState(false);
+    const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+    const [commentsExpanded, setCommentsExpanded] = useState(false);
     const navigateToPost = useNavigateToPost(id, params);
+    const { refetch } = useLikePost({ id, skip: params.skip });
+    const email = useSelector(userEmail);
 
-    if (isFetching) return <PostSkeleton />;
+    if (isLoading) return <PostSkeleton />;
 
     return (
         <Wrapper>
@@ -31,15 +39,24 @@ const PostsItem = ({
 
             <InfoBar>
                 <Description>{formatDate(date)}</Description>
-                <Description primary>👍 {likes}</Description>
+                <Description primary onClick={() => refetch()} enabled={email}>
+                    👍 {likes}
+                </Description>
             </InfoBar>
-            {expanded && <PostDetails id={id} />}
+            {descriptionExpanded && <PostDetails id={id} />}
             <InfoBar>
-                <BasicButton onClick={() => setExpanded(!expanded)}>
-                    Show {expanded ? 'less' : 'more'}
+                <BasicButton
+                    onClick={() => setDescriptionExpanded(!descriptionExpanded)}
+                >
+                    Show {descriptionExpanded ? 'less' : 'more'}
                 </BasicButton>
-                <BasicButton>Comments</BasicButton>
+                <BasicButton
+                    onClick={() => setCommentsExpanded(!commentsExpanded)}
+                >
+                    Comments
+                </BasicButton>
             </InfoBar>
+            {commentsExpanded && <CommentsList postId={id} />}
         </Wrapper>
     );
 };

@@ -1,7 +1,7 @@
-const userToken = state => state.user.token;
+export const userToken = state => state.user.token;
 
-const userEmail = state => state.user.email;
+export const userEmail = state => state.user.email;
 
-const errorMessage = state => state.error;
+export const user = state => state.user;
 
-export { userToken, userEmail, errorMessage };
+export const errorMessage = state => state.error;
