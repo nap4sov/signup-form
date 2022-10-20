@@ -17,6 +17,7 @@ export const NAVIGATION_ROUTES = {
     myProfile: {
         path: ROUTES.myProfile,
         label: 'My profile',
+        restricted: true,
     },
 };
 

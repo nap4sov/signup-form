@@ -9,3 +9,9 @@ export const register = async userData => {
         return response.data;
     }
 };
+
+export const getProfileInfo = async id =>
+    (await axios.get(`/users/${id}`)).data;
+
+export const editProfileInfo = async ({ id, editedData }) =>
+    (await axios.patch(`/users/${id}`, editedData)).data;
