@@ -13,7 +13,7 @@ import SuccessNotifier from '../../SuccessNotifier';
 // constants
 import { LOGIN_FIELDS, LOGIN_INIT_STATE } from '../../../constants/formInfo';
 // validation
-import { validateLogin } from '../../../helpers/formValidation';
+import { validateLogin } from '../../../helpers/validation';
 
 const LoginForm = () => {
     // field state

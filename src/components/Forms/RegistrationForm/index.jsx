@@ -15,7 +15,7 @@ import {
     REGISTRATION_INIT_STATE,
 } from '../../../constants/formInfo';
 // validation
-import { validateRegistration } from '../../../helpers/formValidation';
+import { validateRegistration } from '../../../helpers/validation';
 
 const RegistrationForm = () => {
     // field state

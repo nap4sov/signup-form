@@ -14,8 +14,7 @@ import { NewPost } from '../../components/Posts/NewPost';
 
 const Posts = ({ all }) => {
     const [newPostOpen, setNewPostOpen] = useState(false);
-    const { renderParams, searchParams, setSearchParams, totalPages } =
-        usePagination();
+    const { renderParams, skip, setSearchParams, totalPages } = usePagination();
     const userLoggedIn = useSelector(userEmail);
 
     const showAddButton = useMemo(
@@ -28,14 +27,16 @@ const Posts = ({ all }) => {
     );
 
     const handleClick = ({ target }) => {
-        setSearchParams({ ...searchParams, page: target.value });
+        setSearchParams({ page: target.value });
     };
 
     return (
         <Container>
             {all ? (
                 <>
-                    {showNewPost && <NewPost setNewPostOpen={setNewPostOpen} />}
+                    {showNewPost && (
+                        <NewPost setNewPostOpen={setNewPostOpen} skip={skip} />
+                    )}
                     {showAddButton && (
                         <AddButton onClick={() => setNewPostOpen(true)}>
                             +

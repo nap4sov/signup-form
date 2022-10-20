@@ -15,3 +15,6 @@ export const deleteComment = async commentId =>
 
 export const likeComment = async commentId =>
     (await axios.put(`/comments/like/${commentId}`)).data;
+
+export const editComment = async ({ commentId, comment }) =>
+    (await axios.patch(`/comments/${commentId}`, { text: comment })).data;
