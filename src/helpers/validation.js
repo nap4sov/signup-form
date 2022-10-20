@@ -1,5 +1,6 @@
 import { usernameRegex, emailRegex } from '../constants/regex';
 import { errorMessages } from '../constants/statusMessages';
+import { PROFILE_FIELDS } from '../constants/profileInfo';
 
 export const validateLogin = ({ email, password }) => {
     const errorData = {
@@ -38,3 +39,10 @@ export const validatePostEdit = update => {
 };
 
 export const validateComment = comment => comment.trim().length >= 3;
+
+export const validateProfileEdit = fullData =>
+    PROFILE_FIELDS.reduce((acc, { key, editable }) => {
+        if (!editable) return acc;
+
+        return { ...acc, [key]: fullData[key] };
+    }, {});
