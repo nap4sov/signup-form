@@ -19,7 +19,7 @@ const Profile = () => {
     const { id } = useSelector(user);
     const { data } = useGetProfileInfo(id);
     const userData = useMemo(() => (data ? data : {}), [data]);
-    const form = useProfileForm({ defaultValues: userData });
+    const form = useProfileForm();
 
     const [editing, setEditing] = useState(false);
 
