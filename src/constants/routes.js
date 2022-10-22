@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { SignupForm, Posts, Profile } from '../layout';
+import { SignupForm, Posts, Profile, Text } from '../layout';
 
 export const ROUTES = {
     posts: '/posts',
@@ -7,6 +7,7 @@ export const ROUTES = {
     users: '/users',
     myProfile: '/profile',
     signup: '/signup',
+    text: '/text',
 };
 
 export const NAVIGATION_ROUTES = {
@@ -18,6 +19,10 @@ export const NAVIGATION_ROUTES = {
         path: ROUTES.myProfile,
         label: 'My profile',
         restricted: true,
+    },
+    text: {
+        path: ROUTES.text,
+        label: 'Selecting text',
     },
 };
 
@@ -45,6 +50,11 @@ export const LAYOUT_ROUTES = {
     signup: {
         path: ROUTES.signup,
         element: () => <SignupForm />,
+        restricted: false,
+    },
+    text: {
+        path: ROUTES.text,
+        element: () => <Text />,
         restricted: false,
     },
 };
