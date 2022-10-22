@@ -5,9 +5,8 @@ export const EditableField = ({
     type,
     value,
     id,
+    editable,
     handleKeyUp,
-    handleInputChange,
-    handleFocus,
     handleBlur,
     handleDoubleClick,
 }) => {
@@ -16,12 +15,10 @@ export const EditableField = ({
     return (
         <EditField
             id={id}
-            contentEditable
+            contentEditable={editable}
             ref={element}
             type={type}
             onKeyUp={handleKeyUp}
-            onInput={handleInputChange}
-            onFocus={handleFocus}
             onBlur={handleBlur}
             onDoubleClick={handleDoubleClick}
             suppressContentEditableWarning
