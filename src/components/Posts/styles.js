@@ -13,8 +13,8 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h3`
     display: inline-block;
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin: 0 20px 20px 0;
+
     text-transform: uppercase;
 
     transition: color 300ms ease, transform 300ms ease;
@@ -68,4 +68,11 @@ export const DeleteContainer = styled.div`
 
 export const SaveContainer = styled(DeleteContainer)`
     top: 60px;
+`;
+
+export const CopyContainer = styled.button`
+    transform: translateY(-15%);
+    cursor: copy;
+    background-color: transparent;
+    border: none;
 `;

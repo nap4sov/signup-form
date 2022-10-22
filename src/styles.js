@@ -56,4 +56,12 @@ p {
 h1,h2,h3 {
     cursor: default;
 }
+
+`;
+
+export const Mark = styled.span`
+    padding: 1px;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: yellowgreen;
 `;
