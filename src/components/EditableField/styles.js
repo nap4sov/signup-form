@@ -19,4 +19,12 @@ export const EditField = styled.div`
             font-size: 12px;
             margin: 0;
         `}
+    ${props =>
+        props.type === 'plain' &&
+        css`
+            font-size: 16px;
+            line-height: 1.7;
+            padding: 5px;
+            margin: 0;
+        `}
 `;

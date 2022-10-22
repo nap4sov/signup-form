@@ -32,7 +32,7 @@ const PostDetails = ({ id }) => {
     );
 
     const [update, setUpdate] = useState({});
-    const handleInputChange = ({ target }) => {
+    const handleKeyUp = ({ target }) => {
         setUpdate({
             ...update,
             [target.id]: target.innerText,
@@ -61,13 +61,13 @@ const PostDetails = ({ id }) => {
                     )}
                     <EditableField
                         value={title}
-                        handleInputChange={handleInputChange}
+                        handleKeyUp={handleKeyUp}
                         id="title"
                         type="title"
                     />
                     <EditableField
                         value={fullText}
-                        handleInputChange={handleInputChange}
+                        handleKeyUp={handleKeyUp}
                         id="fullText"
                     />
                 </>
